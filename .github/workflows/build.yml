@@ -6,7 +6,7 @@ on:
       source_repo_ssh:
         description: "SOURCE_REPO SSH URL (git@github.com:OWNER/REPO.git)"
         required: true
-        default: "git@github.com:OWNER/SOURCE_REPO.git"
+        default: "git@github.com:FuChuZhao/chroniclewatch-source.git"
       source_ref:
         description: "SOURCE_REPO ref/commit/tag"
         required: true
@@ -14,7 +14,7 @@ on:
       artifact_name:
         description: "Artifact name"
         required: true
-        default: "aw-android"
+        default: "chroniclewatch-android"
       ui_suite:
         description: "UI test suite name (UiPlanTest)"
         required: true
