@@ -93,6 +93,27 @@ jobs:
           fi
           RUN_E2E=false OUT_DIR="$PWD/out/artifacts" bash tool/ci/build.sh
 
+      - name: Pre-emulator cleanup (free disk)
+        if: ${{ inputs.run_e2e == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "[ci] Disk before cleanup:"
+          df -h
+
+          rm -rf source/aw-server-rust/target || true
+          rm -rf source/aw-server-rust/aw-webui/node_modules || true
+          rm -rf source/mobile/build || true
+
+          rm -rf ~/.gradle/caches ~/.gradle/wrapper/dists || true
+          rm -rf ~/.cargo/registry ~/.cargo/git || true
+
+          rm -rf /usr/local/lib/android/sdk/ndk/25.2.9519653 || true
+          rm -rf /usr/local/lib/android/sdk/ndk/26.3.11579264 || true
+
+          echo "[ci] Disk after cleanup:"
+          df -h
+
       - name: E2E (emulator)
         if: ${{ inputs.run_e2e == 'true' }}
         uses: reactivecircus/android-emulator-runner@v2
@@ -103,11 +124,11 @@ jobs:
           emulator-options: -no-window -no-audio -no-boot-anim -no-snapshot-save -gpu swiftshader_indirect
           ram-size: 2048M
           heap-size: 512M
-          disk-size: 16G
+          disk-size: 6G
           emulator-boot-timeout: 1200
           disable-animations: true
           script: |
-            cd source && OUT_DIR="$PWD/out/artifacts" UI_SUITE="${{ inputs.ui_suite }}" bash tool/ci/e2e_connected.sh
+            cd source && OUT_DIR="$PWD/out/artifacts" UI_SUITE="${{ inputs.ui_suite }}" bash tool/ci/instrumentation_yolo.sh
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
