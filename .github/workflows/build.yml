@@ -103,7 +103,7 @@ jobs:
           emulator-options: -no-window -no-audio -no-boot-anim -no-snapshot-save -gpu swiftshader_indirect
           ram-size: 2048M
           heap-size: 512M
-          disk-size: 8G
+          disk-size: 16G
           emulator-boot-timeout: 1200
           disable-animations: true
           script: |
