@@ -91,6 +91,7 @@ jobs:
             export CLEAN_JNILIBS_BEFORE_BUILD=true
             export RUSTFLAGS_ANDROID_OVERRIDE="-Awarnings"
             export SKIP_WEBUI=true
+            export AW_GRADLE_ABIS=x86_64
           fi
           RUN_E2E=false OUT_DIR="$PWD/out/artifacts" bash tool/ci/build.sh
 
