@@ -133,8 +133,10 @@ jobs:
             cd source && OUT_DIR="$PWD/out/artifacts" UI_SUITE="${{ inputs.ui_suite }}" bash tool/ci/instrumentation_yolo.sh
 
       - name: Upload artifacts
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact_name }}
           path: source/out/artifacts
+          if-no-files-found: warn
           retention-days: 1
