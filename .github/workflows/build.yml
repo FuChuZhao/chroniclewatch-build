@@ -33,7 +33,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.run_e2e == 'true' && 'macos-latest' || 'ubuntu-latest' }}
     steps:
       - name: Set up JDK
         uses: actions/setup-java@v4
