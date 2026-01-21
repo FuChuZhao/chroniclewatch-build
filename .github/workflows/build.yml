@@ -122,13 +122,13 @@ jobs:
         with:
           api-level: 30
           arch: x86_64
-          target: google_apis
+          target: default
           emulator-options: -no-window -no-audio -no-boot-anim -no-snapshot-save -gpu swiftshader_indirect
-          ram-size: 2048M
-          heap-size: 512M
-          disk-size: 6G
+          ram-size: 4096M
+          heap-size: 1024M
+          disk-size: 10G
           emulator-boot-timeout: 1200
-          disable-animations: false
+          disable-animations: true
           script: |
             cd source && OUT_DIR="$PWD/out/artifacts" UI_SUITE="${{ inputs.ui_suite }}" bash tool/ci/instrumentation_yolo.sh
 
